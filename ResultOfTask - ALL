@@ -1,0 +1,143 @@
+1-  Create Tables 
+2-  Insert Data:
+
+CREATE Table Customers(
+  CustomerID int,
+  FirstName varchar(255),
+  LastName varchar(255),
+  Address varchar(255),
+  Country varchar(255)
+);
+INSERT INTO Customers
+VALUES
+(1, 'John', 'Doe', '123 Main St', 'Germany'),
+(2, 'Maria', 'Schmidt', '456 Elm St', 'US'),
+(3, 'Luis', 'Gonzalez', '789 Oak St', 'Spain'),
+(4, 'Elena', 'Ivanova', '321 Pine St', 'Germany'),
+(5, 'Mohammed', 'Ali', '987 Birch St', 'Italy');
+---------------------------------------------
+CREATE Table Orders(
+  OrderID int,
+  ProductID int,
+  Quantity int,
+  OrderDate DATE
+);
+INSERT INTO Orders
+VALUES
+(1, 1, 2, '2024-02-19'),
+(2, 2, 1, '2024-02-20'),
+(3, 3, 3, '2024-02-21'),
+(4, 4, 2, '2024-02-22'),
+(5, 5, 1, '2024-02-23');
+------------------------------------------------
+CREATE Table Product(
+  ProductName varchar(255),
+  Prce int,
+  City varchar(255)
+);
+INSERT INTO Product
+VALUES
+('Tour Berlin', 500, 'Berlin'),
+('Accommodation Newyork', 120, 'New York'),
+('Tour Paris', 300, 'Paris'),
+('Accommodation London', 150, 'London'),
+('Tour Tokyo', 400, 'Tokyo');
+--------------------------------------------------
+1. Insert New Customers : 
+INSERT INTO Customers
+VALUES
+(6, 'Gizem', 'Turhan', '567 Bla St', 'Germany'),
+(7, 'Rachel', 'Green', '911 BlaBla St', 'US');
+
+2.  Select All Customers : 
+SELECT * FROM Customers;
+
+3.  Find Unique Cities :  (I used country)
+SELECT DISTINCT country FROM Customers;
+
+4.  Order Details Insertion :
+INSERT INTO Orders
+VALUES
+(6, 1, 4, '2024-02-24'),
+(7, 2, 2, '2024-02-25'),
+(8, 3, 1, '2024-02-26'),
+(9, 4, 3, '2024-02-27'),
+(10, 5, 2, '2024-02-28');
+
+5.  Customers from a Specific Country :
+SELECT * FROM Customers
+WHERE country = 'US';
+
+6.  German Customers Sorted : 
+SELECT * FROM Customers
+WHERE country = 'Germany'
+ORDER by firstname ASC;
+---------
+SELECT * FROM Customers
+WHERE country = 'Germany'
+ORDER by firstname DESC;
+
+7.  Customers with Names Starting with 'S' : 
+SELECT * FROM Customers
+WHERE country = 'Germany' and firstname LIKE 'S%';
+
+8.  Correcting Country Names :
+UPDATE Customers
+set country = 'Germany'
+WHERE country = 'Germnay';
+
+9.  Deleting Records : 
+DELETE FROM Customers
+WHERE customerid = 10;
+
+10.  Limiting Results :
+SELECT * from Customers
+LIMIT 3;
+
+11.  Aggregations : 
+SELECT 
+MAX(quantity), 
+MIN(quantity),
+AVG(quantity) FROM Orders;
+----------------
+SELECT 
+MAX(prce), 
+MIN(prce),
+AVG(prce) FROM Product;
+----------------
+SELECT 
+AVG(prce) FROM Product
+WHERE productname = 'Tour Berlin';
+
+12.  Counting Distinct Countries and Prices : 
+SELECT COUNT(DISTINCT country) FROM Customers;
+SELECT COUNT(DISTINCT prce) FROM Product;
+
+13.  Products Count by City : 
+SELECT city, COUNT(productname) FROM Product
+GROUP by city;
+
+14.  Sum and Average Calculations: 
+SELECT city, 
+SUM(quantity),
+AVG(prce) FROM Product
+GROUP by city;
+--------------------
+SELECT city, 
+SUM(quantity),
+AVG(prce) FROM Product
+where city = 'Berlin'
+GROUP by city;
+
+15.  Grouping Products by City : 
+SELECT city, 
+COUNT(productname) FROM Product
+GROUP by city;
+
+
+
+
+
+
+
+
